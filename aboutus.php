@@ -97,6 +97,15 @@ $revenues = $conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
     </style>
     <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6303d8657db1160019f426d2&product=sop' async='async'></script>
     <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=6303d355a2413d00197af76a&product=sticky-share-buttons" async="async"></script>
+    <!-- Microsoft Clarity Analytics Tracker -->
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "isjlgsliow");
+</script>
+
 </head>
 
 <body>
