@@ -56,7 +56,7 @@ $insert = $stmt->execute();
             <div class="web_menu_wrapper d-none d-sm-none d-md-none d-lg-block d-xl-block">
                 <nav class="menu_scroll">
                     <ul>
-                        <li class="pt-c7 active"><a href="/up" target="_blank">Play</a></li>
+                        <li class="pt-c7 active"><a href="http://play2helpup.free.nf/" target="_blank">Play</a></li>
                         <li class="pt-c7 "><a href="/highscorers.php" target="_blank">Rewards </a></li>
                         <li class="pt-c7 "><a href="/charities.php" alt="charities page">Charities</a></li>
                         <li class="pt-c7 "><a href="/booster.php" target="_blank">Booster </a></li>

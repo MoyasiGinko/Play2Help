@@ -320,7 +320,7 @@
                                             tips and tricks.</li>
                                     </ul>
 
-                                    <a href="https://play2helpworld.com/up" class="web_btn_style" alt="up game link">Play |
+                                    <a href="http://play2helpup.free.nf/" class="web_btn_style" alt="up game link">Play |
                                         Share</a>
                                 </div>
                                 <!-- /.pricing-table-wrapper -->
