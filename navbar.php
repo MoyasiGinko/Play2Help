@@ -59,7 +59,7 @@ $insert = $stmt->execute();
                         <li class="pt-c7 active"><a href="http://play2helpup.free.nf/" target="_blank">Play</a></li>
                         <li class="pt-c7 "><a href="/highscorers.php" target="_blank">Rewards </a></li>
                         <li class="pt-c7 "><a href="/charities.php" alt="charities page">Charities</a></li>
-                        <li class="pt-c7 "><a href="/booster.php" target="_blank">Booster </a></li>
+                        <!-- <li class="pt-c7 "><a href="/booster.php" target="_blank">Booster </a></li> -->
                          <!--** Redeem points commented to be used later
                          <li class="pt-c7 ">
                             <form action="scripts/redeem.php" method="post">
