@@ -4,10 +4,10 @@
 
                     <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                         <div class="web_btm_foter_box">
-                            <a href="https://play2healthworld.com/" alt="play2health website" target="_blank"><img src="assets/site_logos/play2health.png" class="mr-4" style="height: 45px !important; width: 45px !important;"></a>
-                            <a href="https://play2workworld.com/" alt="play2work website" target="_blank"><img src="assets/site_logos/play2work.png" class="mr-4" style="height: 45px !important; width: 45px !important;">
-                            <a href="https://play2livewellworld.com/" alt="play2live website" target="_blank"><img src="assets/site_logos/play2livewell.png" class="mr-4" style="height: 45px !important; width: 45px !important;">
-                            <a href="https://play2learnworld.com/" alt="play2learn website" target="_blank"><img src="assets/site_logos/play2learn.webp" style="height: 45px !important; width: 45px !important;">
+                            <a href="http://play2health.free.nf/" alt="play2health website" target="_blank"><img src="assets/site_logos/play2health.png" class="mr-4" style="height: 45px !important; width: 45px !important;"></a>
+                            <a href="http://play2work.free.nf/" alt="play2work website" target="_blank"><img src="assets/site_logos/play2work.png" class="mr-4" style="height: 45px !important; width: 45px !important;">
+                            <a href="http://play2live.free.nf/" alt="play2live website" target="_blank"><img src="assets/site_logos/play2livewell.png" class="mr-4" style="height: 45px !important; width: 45px !important;">
+                            <a href="http://play2learn.free.nf/" alt="play2learn website" target="_blank"><img src="assets/site_logos/play2learn.webp" style="height: 45px !important; width: 45px !important;">
 
                         </div>
                     </div>
@@ -23,12 +23,12 @@
                 <h4>Have Fun</h4>
                 <ul class="web_footer_about_link web_usefull_linkx full_width">
 
-                    <li><a href="/yum/" class="web_btn_style"
+                    <li><a href="http://play2helpyum.free.nf/" class="web_btn_style"
                             alt="yum game link" target="_blank">YUM
 
                         </a>
                     </li>
-                    <li> <a href="/up/" class="web_btn_style"
+                    <li> <a href="http://play2helpup.free.nf/" class="web_btn_style"
                             alt="up game link" target="_blank">UP
                             <!-- Terms of use/Legal Info  here-->
                         </a>

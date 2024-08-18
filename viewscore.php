@@ -87,7 +87,7 @@
                     <li><a href="0">Home</a></li>
                     <li><a href="1">View Scores</a></li>
                     <li><a href="/index.php">Play</a></li>
-                    <li><a href="/highscorers.php">High Scorers</a></li>
+                    <!-- <li><a href="/highscorers.php">High Scorers</a></li> -->
                     <li><a href="6">Socials</a></li>
                     <li><a href="events.html">Events</a></li>
                 </ul>
@@ -151,7 +151,7 @@
                                             <div class="web_header_btn web_slider_btn full_width menu_scroll">
                                                 <ul>
                                                     <li data-animation="animated bounceInLeft">
-                                                        <a href="/index.php">Play Now</a>
+                                                        <a href="http://play2helpup.free.nf/">Play Now</a>
                                                     </li>
 
                                                 </ul>

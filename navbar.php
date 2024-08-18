@@ -119,9 +119,9 @@ $insert = $stmt->execute();
     <div id="web_toggle_close">&times;</div>
     <div id='web_cssmenu' class="menu_scroll">
         <ul class="sidebb">
-            <li><a href="/up" target="_blank"
+            <li><a href="http://play2helpup.free.nf/" target="_blank"
                 alt="play2help up game">Play</a></li>
-            <li><a href="/highscorers.php" target="_blank"
+            <li><a href="/viewscore.php" target="_blank"
                 alt="play2help rewards page">Rewards</a></li>
             <li><a href="/charities.php" alt="charities page">Charities</a></li>
             <li><a href="/booster.php" alt="play2help booster page">Booster</a></li>
