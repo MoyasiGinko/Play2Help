@@ -12,7 +12,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Enjoy our fun free games, select rewards for you and popular charities." />
-    <meta name="keywords" content="free, fun, game, gaming, online gaming, pc game, android game, ios game, rewards, charity, charities" />
+    <meta name="keywords" content="free, fun, game, gaming, online gaming, 
+        pc game, android game, ios game, rewards, charity, charities" />
     <meta name="author" content="Play2Help World Maurice Flynn" />
     <meta name="MobileOptimized" content="320" />
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
@@ -206,16 +207,7 @@
 </head>
 
 <body>
-    <!--** Testing propeller ads**-->
-    <!-- <script>
-        (function(d, z, s) {
-            s.src = 'https://' + d + '/401/' + z;
-            try {
-                (document.body || document.documentElement).appendChild(s)
-            } catch (e) {}
-        })('goomaphy.com', 5319655, document.createElement('script'))
-    </script> -->
-    <a href="javascript:" id="return-to-top" alt="link to go to beginning of page with an arrow pointing up"><i class="fas fa-arrow-up"></i> <br>top</a>
+    <!-- <a href="javascript:" id="return-to-top" alt="link to go to beginning of page with an arrow pointing up"><i class="fas fa-arrow-up"></i> <br>top</a> -->
 
     <!-- Preloader start -->
     <div id="preloader">
@@ -351,7 +343,7 @@
                                             for tips and tricks.</li>
                                     </ul>
 
-                                    <a href="https://play2helpworld.com/yum/" class="web_btn_style" alt="yum game link">Play | Share</a>
+                                    <a href="http://play2helpyum.free.nf" class="web_btn_style" alt="yum game link">Play | Share</a>
                                 </div>
                                 <!-- /.pricing-table-wrapper -->
                             </div>
