@@ -35,39 +35,6 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <script src="/js/timeme.min.js"></script>
-    <script type="text/javascript">
-        TimeMe.initialize({
-            currentPageName: "index", // current page
-            idleTimeoutInSeconds: 5, // stop recording time due to inactivity
-            //websocketOptions: { // optional
-            //	websocketHost: "ws://your_host:your_port",
-            //	appId: "insert-your-made-up-app-id"
-            //}
-        });
-
-        // TimeMe.callAfterTimeElapsedInSeconds(4, function () {
-        // 	console.log("The user has been using the page for 4 seconds! Let's prompt them with something.");
-        // })
-
-        // TimeMe.callAfterTimeElapsedInSeconds(9, function () {
-        // 	console.log("The user has been using the page for 9 seconds! Let's prompt them with something.");
-        // });
-
-
-        window.onload = function() {
-            setInterval(function() {
-                let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
-                document.getElementById('timeInSeconds').textContent = timeSpentOnPage.toFixed(2);
-
-                if (TimeMe.isUserCurrentlyOnPage && TimeMe.isUserCurrentlyIdle === false) {
-                    document.getElementById('activityStatus').textContent = "You are actively using this page."
-                } else {
-                    document.getElementById('activityStatus').textContent = "You have left the page."
-                }
-            }, 37);
-        }
-    </script>
-
     <meta name="am-api-token" content="xOvEtmIoh">
 
     <!-- End Google Tag Manager -->
@@ -97,12 +64,17 @@
     <link rel="stylesheet" href="/css/signin.css">
     <!-- Microsoft Clarity Analytics Tracker-->
     <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "isjlgsliow");
-</script>
+        (function(c, l, a, r, i, t, y) {
+            c[a] = c[a] || function() {
+                (c[a].q = c[a].q || []).push(arguments)
+            };
+            t = l.createElement(r);
+            t.async = 1;
+            t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0];
+            y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "isjlgsliow");
+    </script>
 
 
     <style>
@@ -210,11 +182,11 @@
     <!-- <a href="javascript:" id="return-to-top" alt="link to go to beginning of page with an arrow pointing up"><i class="fas fa-arrow-up"></i> <br>top</a> -->
 
     <!-- Preloader start -->
-    <div id="preloader">
+    <!-- <div id="preloader">
         <div id="status">
             <div class="status-mes"></div>
         </div>
-    </div>
+    </div> -->
     <!-- Preloader end -->
 
     <div data-scroll='0' class="full_width">
@@ -431,7 +403,14 @@
                                         <!-- <li></li> -->
                                     </ul>
 
-                                    <button class="web_btn_style" alt="coming soon button" disabled>Coming Soon</button>
+                                    <button class="web_btn_style" alt="coming soon button" >
+                                        <!-- <a href="http://localhost/games/snakeGame/">
+                                            play
+                                        </a> -->
+                                        <a href="http://play2help.unaux.com/games/snakeGame/">
+                                            play
+                                        </a>
+                                    </button>
                                 </div>
                                 <!-- /.pricing-table-wrapper -->
                             </div>
@@ -451,7 +430,11 @@
                                             tricks.</li>
                                     </ul>
 
-                                    <button class="web_btn_style" alt="coming soon button" disabled>Coming Soon</button>
+                                    <button class="web_btn_style" alt="coming soon button">
+                                        <a href="http://localhost/games/racingGame/">
+                                            play
+                                        </a>
+                                    </button>
                                 </div>
                                 <!-- /.pricing-table-wrapper -->
                             </div>
@@ -548,7 +531,7 @@
         </div>
 
     </div>
-<!-- 
+    <!-- 
     <div id="detect" class="ads ad adsbox doubleclick ad-placement carbon-ads"></div>
     <div class="adblocker-popup">
         <div class="adblocker-popup_inner">
@@ -748,6 +731,38 @@
                     console.log('complete');
                 });
             };
+        </script>
+        <script type="text/javascript">
+            TimeMe.initialize({
+                currentPageName: "index", // current page
+                idleTimeoutInSeconds: 5, // stop recording time due to inactivity
+                //websocketOptions: { // optional
+                //	websocketHost: "ws://your_host:your_port",
+                //	appId: "insert-your-made-up-app-id"
+                //}
+            });
+
+            // TimeMe.callAfterTimeElapsedInSeconds(4, function () {
+            // 	console.log("The user has been using the page for 4 seconds! Let's prompt them with something.");
+            // })
+
+            // TimeMe.callAfterTimeElapsedInSeconds(9, function () {
+            // 	console.log("The user has been using the page for 9 seconds! Let's prompt them with something.");
+            // });
+
+
+            window.onload = function() {
+                setInterval(function() {
+                    let timeSpentOnPage = TimeMe.getTimeOnCurrentPageInSeconds();
+                    document.getElementById('timeInSeconds').textContent = timeSpentOnPage.toFixed(2);
+
+                    if (TimeMe.isUserCurrentlyOnPage && TimeMe.isUserCurrentlyIdle === false) {
+                        document.getElementById('activityStatus').textContent = "You are actively using this page."
+                    } else {
+                        document.getElementById('activityStatus').textContent = "You have left the page."
+                    }
+                }, 37);
+            }
         </script>
 </body>
 

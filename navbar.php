@@ -2,26 +2,26 @@
 
 
 // Include the database configuration file 
-include('db/dbpdo.php');
+// include('db/dbpdo.php');
 
 // Get current page URL 
-$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-$currentURL = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . $_SERVER['QUERY_STRING'];
+// $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+// $currentURL = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . $_SERVER['QUERY_STRING'];
 
 // Get server related info 
-$user_ip_address = $_SERVER['REMOTE_ADDR'];
-$referrer_url = !empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
-$user_agent = $_SERVER['HTTP_USER_AGENT'];
+// $user_ip_address = $_SERVER['REMOTE_ADDR'];
+// $referrer_url = !empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
+// $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
 // Insert visitor log into database 
-$sql = "INSERT INTO visitor_logs (page_url, referrer_url, user_ip_address, user_agent, created) VALUES (:page_url, :referrer_url, :user_ip_address, :user_agent, NOW())";
-$stmt = $conn->prepare($sql);
-$stmt->bindParam(":page_url", $currentURL);
-$stmt->bindParam(":referrer_url", $referrer_url);
-$stmt->bindParam(":user_ip_address", $user_ip_address);
-$stmt->bindParam(":user_agent", $user_agent);
+// $sql = "INSERT INTO visitor_logs (page_url, referrer_url, user_ip_address, user_agent, created) VALUES (:page_url, :referrer_url, :user_ip_address, :user_agent, NOW())";
+// $stmt = $conn->prepare($sql);
+// $stmt->bindParam(":page_url", $currentURL);
+// $stmt->bindParam(":referrer_url", $referrer_url);
+// $stmt->bindParam(":user_ip_address", $user_ip_address);
+// $stmt->bindParam(":user_agent", $user_agent);
 
-$insert = $stmt->execute();
+// $insert = $stmt->execute();
 
 
 ?>

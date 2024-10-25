@@ -141,13 +141,13 @@ a:hover {
 /* ---------------------------------------------- */
 
 #preloader {
-	background: #FFF;
+	/* background: #FFF; */
 	bottom: 0;
 	left: 0;
 	position: fixed;
 	right: 0;
 	top: 0;
-	z-index: 9999;
+	z-index: 1;
 }
 
 #status {
