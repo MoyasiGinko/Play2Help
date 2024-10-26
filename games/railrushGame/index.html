@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rail Rush Game</title>
+    <style>
+      canvas {
+        background-color: #333;
+        display: block;
+        margin: 0 auto;
+        border: 2px solid #fff;
+      }
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        color: #fff;
+      }
+      #controls {
+        margin-top: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: #ff0000;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin: 5px;
+      }
+      #retryButton {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rail Rush Game</h1>
+    <canvas id="gameCanvas" width="500" height="700"></canvas>
+    <div id="controls">
+      <button id="retryButton" onclick="resetGame()">Retry</button>
+      <button id="playButton">Play</button>
+      <button id="pauseButton">Pause</button>
+    </div>
+    <script src="game.js"></script>
+  </body>
+</html>
