@@ -5,13 +5,16 @@ const playButton = document.getElementById("playButton");
 const pauseButton = document.getElementById("pauseButton");
 const retryButton = document.getElementById("retryButton");
 
+const railPositions = [80, 240, 400]; // Center x-coordinates for each rail track
+let currentRailIndex = 1; // Start on the middle rail
+
 let cart = {
-  x: canvas.width / 2 - 20,
+  x: railPositions[currentRailIndex] - 20,
   y: canvas.height - 80,
   width: 50,
   height: 30,
-  speed: 30,
 };
+
 let coins = [];
 let obstacles = [];
 let score = 0;
@@ -20,50 +23,54 @@ let gamePaused = false;
 let animationFrame;
 let railOffset = 0;
 
-// Controls
+// Controls for switching rails
 document.addEventListener("keydown", (event) => {
   if (!gamePaused) {
-    if (event.key === "ArrowLeft" && cart.x > 50) {
-      cart.x -= cart.speed;
+    if (event.key === "ArrowLeft" && currentRailIndex > 0) {
+      currentRailIndex--;
+      cart.x = railPositions[currentRailIndex] - 20;
     } else if (
       event.key === "ArrowRight" &&
-      cart.x + cart.width < canvas.width - 50
+      currentRailIndex < railPositions.length - 1
     ) {
-      cart.x += cart.speed;
+      currentRailIndex++;
+      cart.x = railPositions[currentRailIndex] - 20;
     }
   }
 });
 
-// Generate coins and obstacles
+// Generate coins and obstacles on rails
 function generateCoins() {
   if (Math.random() < 0.02) {
-    // Slower frequency
+    const randomRail = Math.floor(Math.random() * railPositions.length);
     coins.push({
-      x: Math.random() * (canvas.width - 100) + 50,
+      x: railPositions[randomRail],
       y: 0,
       radius: 10,
     });
   }
   coins.forEach((coin, index) => {
-    coin.y += 1.5; // Slower speed
+    coin.y += 1.5;
     if (coin.y > canvas.height) coins.splice(index, 1);
   });
 }
 
 function generateObstacles() {
   if (Math.random() < 0.02) {
+    const randomRail = Math.floor(Math.random() * railPositions.length);
     obstacles.push({
-      x: Math.random() * (canvas.width - 100) + 50,
+      x: railPositions[randomRail],
       y: 0,
       type: Math.random() < 0.5 ? "rock" : "bomb",
     });
   }
   obstacles.forEach((obstacle, index) => {
-    obstacle.y += 2; // Slower speed
+    obstacle.y += 2;
     if (obstacle.y > canvas.height) obstacles.splice(index, 1);
   });
 }
 
+// Detect collisions
 function detectCollisions() {
   coins.forEach((coin, index) => {
     if (
@@ -93,10 +100,10 @@ function detectCollisions() {
 
 // Draw objects
 function drawCart() {
-  ctx.fillStyle = "#ff6347"; // Train body
+  ctx.fillStyle = "#ff6347";
   ctx.fillRect(cart.x, cart.y, cart.width, cart.height);
   ctx.fillStyle = "#000";
-  ctx.fillRect(cart.x + 5, cart.y + 5, cart.width - 10, cart.height - 10); // Window
+  ctx.fillRect(cart.x + 5, cart.y + 5, cart.width - 10, cart.height - 10);
 }
 
 function drawCoins() {
@@ -131,45 +138,37 @@ function drawObstacles() {
   });
 }
 
-// Background scenery
-function drawMountains() {
-  ctx.fillStyle = "#5D5";
-  ctx.beginPath();
-  ctx.moveTo(0, canvas.height);
-  ctx.lineTo(100, 500);
-  ctx.lineTo(200, canvas.height);
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.moveTo(canvas.width, canvas.height);
-  ctx.lineTo(canvas.width - 100, 500);
-  ctx.lineTo(canvas.width - 200, canvas.height);
-  ctx.fill();
-}
-
+// Draw complete rail tracks
 function drawRails() {
   railOffset += 2;
   if (railOffset > 40) railOffset = 0;
 
-  // Draw vertical rails
-  ctx.strokeStyle = "#555";
   ctx.lineWidth = 4;
-  ctx.beginPath();
-  ctx.moveTo(150, 0);
-  ctx.lineTo(150, canvas.height);
-  ctx.moveTo(350, 0);
-  ctx.lineTo(350, canvas.height);
-  ctx.stroke();
+  ctx.strokeStyle = "#555";
 
-  // Draw cross-ties
-  ctx.strokeStyle = "#888";
-  ctx.lineWidth = 2;
-  for (let i = railOffset; i < canvas.height; i += 40) {
+  railPositions.forEach((x) => {
+    // Left rail line
     ctx.beginPath();
-    ctx.moveTo(140, i);
-    ctx.lineTo(360, i);
+    ctx.moveTo(x - 15, 0);
+    ctx.lineTo(x - 15, canvas.height);
     ctx.stroke();
-  }
+
+    // Right rail line
+    ctx.beginPath();
+    ctx.moveTo(x + 15, 0);
+    ctx.lineTo(x + 15, canvas.height);
+    ctx.stroke();
+
+    // Cross ties
+    for (let i = railOffset; i < canvas.height; i += 40) {
+      ctx.beginPath();
+      ctx.moveTo(x - 20, i);
+      ctx.lineTo(x + 20, i);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#888";
+      ctx.stroke();
+    }
+  });
 }
 
 function drawScore() {
@@ -184,7 +183,6 @@ function gameLoop() {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  drawMountains();
   drawRails();
   generateCoins();
   generateObstacles();
@@ -213,13 +211,7 @@ pauseButton.addEventListener("click", () => {
 
 // Reset game
 function resetGame() {
-  cart = {
-    x: canvas.width / 2 - 20,
-    y: canvas.height - 80,
-    width: 50,
-    height: 30,
-    speed: 5,
-  };
+  cart.x = railPositions[currentRailIndex] - 20;
   coins = [];
   obstacles = [];
   score = 0;
