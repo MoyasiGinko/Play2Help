@@ -1,5 +1,6 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
+
 const playButton = document.getElementById("playButton");
 const pauseButton = document.getElementById("pauseButton");
 const retryButton = document.getElementById("retryButton");
@@ -9,7 +10,7 @@ let cart = {
   y: canvas.height - 80,
   width: 50,
   height: 30,
-  speed: 5,
+  speed: 30,
 };
 let coins = [];
 let obstacles = [];
@@ -17,47 +18,48 @@ let score = 0;
 let gameOver = false;
 let gamePaused = false;
 let animationFrame;
+let railOffset = 0;
 
-// Cart controls
+// Controls
 document.addEventListener("keydown", (event) => {
   if (!gamePaused) {
-    if (event.key === "ArrowLeft" && cart.x > 0) {
+    if (event.key === "ArrowLeft" && cart.x > 50) {
       cart.x -= cart.speed;
     } else if (
       event.key === "ArrowRight" &&
-      cart.x + cart.width < canvas.width
+      cart.x + cart.width < canvas.width - 50
     ) {
       cart.x += cart.speed;
     }
   }
 });
 
+// Generate coins and obstacles
 function generateCoins() {
-  if (Math.random() < 0.05) {
+  if (Math.random() < 0.02) {
+    // Slower frequency
     coins.push({
-      x: Math.random() * (canvas.width - 20),
+      x: Math.random() * (canvas.width - 100) + 50,
       y: 0,
-      width: 20,
-      height: 20,
+      radius: 10,
     });
   }
   coins.forEach((coin, index) => {
-    coin.y += 2;
+    coin.y += 1.5; // Slower speed
     if (coin.y > canvas.height) coins.splice(index, 1);
   });
 }
 
 function generateObstacles() {
-  if (Math.random() < 0.03) {
+  if (Math.random() < 0.02) {
     obstacles.push({
-      x: Math.random() * (canvas.width - 50),
+      x: Math.random() * (canvas.width - 100) + 50,
       y: 0,
-      width: 50,
-      height: 30,
+      type: Math.random() < 0.5 ? "rock" : "bomb",
     });
   }
   obstacles.forEach((obstacle, index) => {
-    obstacle.y += 4;
+    obstacle.y += 2; // Slower speed
     if (obstacle.y > canvas.height) obstacles.splice(index, 1);
   });
 }
@@ -65,9 +67,9 @@ function generateObstacles() {
 function detectCollisions() {
   coins.forEach((coin, index) => {
     if (
-      cart.x < coin.x + coin.width &&
+      cart.x < coin.x + coin.radius &&
       cart.x + cart.width > coin.x &&
-      cart.y < coin.y + coin.height &&
+      cart.y < coin.y + coin.radius &&
       cart.y + cart.height > coin.y
     ) {
       coins.splice(index, 1);
@@ -77,9 +79,9 @@ function detectCollisions() {
 
   obstacles.forEach((obstacle) => {
     if (
-      cart.x < obstacle.x + obstacle.width &&
+      cart.x < obstacle.x + 20 &&
       cart.x + cart.width > obstacle.x &&
-      cart.y < obstacle.y + obstacle.height &&
+      cart.y < obstacle.y + 20 &&
       cart.y + cart.height > obstacle.y
     ) {
       gameOver = true;
@@ -89,7 +91,7 @@ function detectCollisions() {
   });
 }
 
-// Draw functions for cart, coins, obstacles, score, and rails
+// Draw objects
 function drawCart() {
   ctx.fillStyle = "#ff6347"; // Train body
   ctx.fillRect(cart.x, cart.y, cart.width, cart.height);
@@ -100,25 +102,56 @@ function drawCart() {
 function drawCoins() {
   ctx.fillStyle = "#FFD700";
   coins.forEach((coin) => {
-    ctx.fillRect(coin.x, coin.y, coin.width, coin.height);
+    ctx.beginPath();
+    ctx.arc(coin.x, coin.y, coin.radius, 0, Math.PI * 2);
+    ctx.fill();
   });
 }
 
 function drawObstacles() {
-  ctx.fillStyle = "#8B4513";
   obstacles.forEach((obstacle) => {
-    ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+    if (obstacle.type === "rock") {
+      ctx.fillStyle = "#8B4513";
+      ctx.beginPath();
+      ctx.arc(obstacle.x, obstacle.y, 20, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      ctx.fillStyle = "#555";
+      ctx.beginPath();
+      ctx.arc(obstacle.x, obstacle.y, 15, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = "#FF0000";
+      ctx.lineWidth = 2;
+      ctx.moveTo(obstacle.x - 10, obstacle.y);
+      ctx.lineTo(obstacle.x + 10, obstacle.y);
+      ctx.moveTo(obstacle.x, obstacle.y - 10);
+      ctx.lineTo(obstacle.x, obstacle.y + 10);
+      ctx.stroke();
+    }
   });
 }
 
-function drawScore() {
-  ctx.fillStyle = "#fff";
-  ctx.font = "20px Arial";
-  ctx.fillText("Score: " + score, 10, 20);
+// Background scenery
+function drawMountains() {
+  ctx.fillStyle = "#5D5";
+  ctx.beginPath();
+  ctx.moveTo(0, canvas.height);
+  ctx.lineTo(100, 500);
+  ctx.lineTo(200, canvas.height);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(canvas.width, canvas.height);
+  ctx.lineTo(canvas.width - 100, 500);
+  ctx.lineTo(canvas.width - 200, canvas.height);
+  ctx.fill();
 }
 
-// Draw rails with cross-ties
 function drawRails() {
+  railOffset += 2;
+  if (railOffset > 40) railOffset = 0;
+
+  // Draw vertical rails
   ctx.strokeStyle = "#555";
   ctx.lineWidth = 4;
   ctx.beginPath();
@@ -128,10 +161,10 @@ function drawRails() {
   ctx.lineTo(350, canvas.height);
   ctx.stroke();
 
-  // Cross-ties
+  // Draw cross-ties
   ctx.strokeStyle = "#888";
   ctx.lineWidth = 2;
-  for (let i = 0; i < canvas.height; i += 40) {
+  for (let i = railOffset; i < canvas.height; i += 40) {
     ctx.beginPath();
     ctx.moveTo(140, i);
     ctx.lineTo(360, i);
@@ -139,11 +172,19 @@ function drawRails() {
   }
 }
 
+function drawScore() {
+  ctx.fillStyle = "#fff";
+  ctx.font = "20px Arial";
+  ctx.fillText("Score: " + score, 10, 20);
+}
+
+// Game loop
 function gameLoop() {
   if (gameOver) return;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  drawMountains();
   drawRails();
   generateCoins();
   generateObstacles();
