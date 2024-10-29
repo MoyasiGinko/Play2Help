@@ -63,7 +63,7 @@ function generateCoins() {
     });
   }
   coins.forEach((coin, index) => {
-    coin.y += 1.5;
+    coin.y += 2;
     if (coin.y > canvas.height) coins.splice(index, 1);
   });
 }
