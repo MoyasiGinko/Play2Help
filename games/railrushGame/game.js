@@ -9,11 +9,24 @@ const railPositions = [80, 240, 400]; // Center x-coordinates for each rail trac
 let currentRailIndex = 1; // Start on the middle rail
 
 let cart = {
-  x: railPositions[currentRailIndex] - 20,
-  y: canvas.height - 80,
-  width: 50,
-  height: 30,
+  x: railPositions[currentRailIndex] - 40,
+  y: canvas.height - 100,
+  width: 100, // Larger cart size
+  height: 80,
 };
+
+// Load images for cart, rock, bomb, and coin
+const cartImage = new Image();
+cartImage.src = "./assets/main-object.gif"; // Make sure the path is correct
+
+const rockImage = new Image();
+rockImage.src = "./assets/rock.gif";
+
+const bombImage = new Image();
+bombImage.src = "./assets/bomb.gif";
+
+const coinImage = new Image(); // New image for the coin
+coinImage.src = "./assets/coin.gif"; // Path for the coin GIF
 
 let coins = [];
 let obstacles = [];
@@ -28,13 +41,13 @@ document.addEventListener("keydown", (event) => {
   if (!gamePaused) {
     if (event.key === "ArrowLeft" && currentRailIndex > 0) {
       currentRailIndex--;
-      cart.x = railPositions[currentRailIndex] - 20;
+      cart.x = railPositions[currentRailIndex] - 40;
     } else if (
       event.key === "ArrowRight" &&
       currentRailIndex < railPositions.length - 1
     ) {
       currentRailIndex++;
-      cart.x = railPositions[currentRailIndex] - 20;
+      cart.x = railPositions[currentRailIndex] - 40;
     }
   }
 });
@@ -46,7 +59,7 @@ function generateCoins() {
     coins.push({
       x: railPositions[randomRail],
       y: 0,
-      radius: 10,
+      radius: 20, // Keep the radius for collision detection
     });
   }
   coins.forEach((coin, index) => {
@@ -56,7 +69,6 @@ function generateCoins() {
 }
 
 function generateObstacles() {
-  // Adjusted the probability for spawning obstacles to 1% instead of 2%
   if (Math.random() < 0.005) {
     const randomRail = Math.floor(Math.random() * railPositions.length);
     obstacles.push({
@@ -87,9 +99,9 @@ function detectCollisions() {
 
   obstacles.forEach((obstacle) => {
     if (
-      cart.x < obstacle.x + 20 &&
+      cart.x < obstacle.x + 40 &&
       cart.x + cart.width > obstacle.x &&
-      cart.y < obstacle.y + 20 &&
+      cart.y < obstacle.y + 40 &&
       cart.y + cart.height > obstacle.y
     ) {
       gameOver = true;
@@ -99,42 +111,25 @@ function detectCollisions() {
   });
 }
 
-// Draw objects
+// Draw cart with GIF
 function drawCart() {
-  ctx.fillStyle = "#ff6347";
-  ctx.fillRect(cart.x, cart.y, cart.width, cart.height);
-  ctx.fillStyle = "#000";
-  ctx.fillRect(cart.x + 5, cart.y + 5, cart.width - 10, cart.height - 10);
+  ctx.drawImage(cartImage, cart.x, cart.y, cart.width, cart.height);
 }
 
+// Draw coins using the coin GIF
 function drawCoins() {
-  ctx.fillStyle = "#FFD700";
   coins.forEach((coin) => {
-    ctx.beginPath();
-    ctx.arc(coin.x, coin.y, coin.radius, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.drawImage(coinImage, coin.x - 20, coin.y - 20, 40, 40); // Adjust size as needed
   });
 }
 
+// Draw obstacles with GIFs
 function drawObstacles() {
   obstacles.forEach((obstacle) => {
     if (obstacle.type === "rock") {
-      ctx.fillStyle = "#8B4513";
-      ctx.beginPath();
-      ctx.arc(obstacle.x, obstacle.y, 20, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.drawImage(rockImage, obstacle.x - 40, obstacle.y - 40, 80, 80); // Larger rock
     } else {
-      ctx.fillStyle = "#555";
-      ctx.beginPath();
-      ctx.arc(obstacle.x, obstacle.y, 15, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.strokeStyle = "#FF0000";
-      ctx.lineWidth = 2;
-      ctx.moveTo(obstacle.x - 10, obstacle.y);
-      ctx.lineTo(obstacle.x + 10, obstacle.y);
-      ctx.moveTo(obstacle.x, obstacle.y - 10);
-      ctx.lineTo(obstacle.x, obstacle.y + 10);
-      ctx.stroke();
+      ctx.drawImage(bombImage, obstacle.x - 30, obstacle.y - 30, 60, 60); // Larger bomb
     }
   });
 }
@@ -148,19 +143,16 @@ function drawRails() {
   ctx.strokeStyle = "#555";
 
   railPositions.forEach((x) => {
-    // Left rail line
     ctx.beginPath();
     ctx.moveTo(x - 15, 0);
     ctx.lineTo(x - 15, canvas.height);
     ctx.stroke();
 
-    // Right rail line
     ctx.beginPath();
     ctx.moveTo(x + 15, 0);
     ctx.lineTo(x + 15, canvas.height);
     ctx.stroke();
 
-    // Cross ties
     for (let i = railOffset; i < canvas.height; i += 40) {
       ctx.beginPath();
       ctx.moveTo(x - 20, i);
@@ -172,6 +164,7 @@ function drawRails() {
   });
 }
 
+// Draw score
 function drawScore() {
   ctx.fillStyle = "#fff";
   ctx.font = "20px Arial";
@@ -212,7 +205,7 @@ pauseButton.addEventListener("click", () => {
 
 // Reset game
 function resetGame() {
-  cart.x = railPositions[currentRailIndex] - 20;
+  cart.x = railPositions[currentRailIndex] - 40;
   coins = [];
   obstacles = [];
   score = 0;
