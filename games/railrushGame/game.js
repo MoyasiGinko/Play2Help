@@ -56,7 +56,8 @@ function generateCoins() {
 }
 
 function generateObstacles() {
-  if (Math.random() < 0.02) {
+  // Adjusted the probability for spawning obstacles to 1% instead of 2%
+  if (Math.random() < 0.005) {
     const randomRail = Math.floor(Math.random() * railPositions.length);
     obstacles.push({
       x: railPositions[randomRail],
