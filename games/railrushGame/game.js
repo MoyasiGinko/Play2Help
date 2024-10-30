@@ -99,9 +99,9 @@ function detectCollisions() {
 
   obstacles.forEach((obstacle) => {
     if (
-      cart.x < obstacle.x + 40 &&
+      cart.x < obstacle.x + 10 &&
       cart.x + cart.width > obstacle.x &&
-      cart.y < obstacle.y + 40 &&
+      cart.y < obstacle.y + 10 &&
       cart.y + cart.height > obstacle.y
     ) {
       gameOver = true;
