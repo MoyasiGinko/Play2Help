@@ -19,6 +19,11 @@ const backgrounds = {
   high: new Image(),
 };
 
+// Load sound effects
+const coinSound = new Audio("./assets/coin-collection.mp3");
+const bombSound = new Audio("./assets/bomb-explosion.mp3");
+const backgroundMusic = new Audio("./assets/background-music.mp3");
+
 backgrounds.low.src = "./assets/brown-rock.png"; // Low score background
 backgrounds.medium.src = "./assets/brown-dark.png"; // Medium score background
 backgrounds.high.src = "./assets/gray-rock.png"; // High score background
@@ -93,6 +98,7 @@ function detectCollisions() {
     ) {
       coins.splice(i, 1);
       score += 10;
+      coinSound.play();
     }
   });
 
@@ -104,13 +110,14 @@ function detectCollisions() {
       cart.y + cart.height > obstacle.y
     ) {
       gameOver = true;
+      bombSound.play();
       // Update highest score if the current score is greater
       if (score > highestScore) {
         highestScore = score;
         localStorage.setItem("highestScore", highestScore);
       }
       displayOverlay(
-        `Game Over\n Score: ${score}\nHighest: ${highestScore}`,
+        `Game Over\n Current Score: ${score}\n Highest: ${highestScore}`,
         false
       );
       cancelAnimationFrame(animationFrame);
@@ -219,6 +226,7 @@ function gameLoop() {
   drawCoins();
   drawObstacles();
   drawScore();
+  backgroundMusic.play();
 
   animationFrame = requestAnimationFrame(gameLoop);
 }
