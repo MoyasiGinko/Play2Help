@@ -12,6 +12,17 @@ const obstacles = [];
 let animationFrame;
 let railOffset = 0;
 
+// Load background textures
+const backgrounds = {
+  low: new Image(),
+  medium: new Image(),
+  high: new Image(),
+};
+
+backgrounds.low.src = "./assets/brown-rock.png"; // Low score background
+backgrounds.medium.src = "./assets/brown-dark.png"; // Medium score background
+backgrounds.high.src = "./assets/gray-rock.png"; // High score background
+
 const cart = {
   x: railPositions[currentRailIndex] - 40,
   y: canvas.height - 100,
@@ -137,6 +148,20 @@ function drawRails() {
   });
 }
 
+// Draw the background texture based on score
+function drawBackground() {
+  let backgroundImage;
+  if (score <= 1000) {
+    backgroundImage = backgrounds.low;
+  } else if (score <= 2000) {
+    backgroundImage = backgrounds.medium;
+  } else {
+    backgroundImage = backgrounds.high;
+  }
+
+  ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+}
+
 // Draw cart
 function drawCart() {
   ctx.drawImage(cartImage, cart.x, cart.y, cart.width, cart.height);
@@ -185,6 +210,7 @@ function gameLoop() {
   if (gameOver) return;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBackground(); // Draw background texture
   drawRails();
   generateCoins();
   generateObstacles();
