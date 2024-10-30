@@ -253,20 +253,39 @@ function resetGame() {
   gameLoop();
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  // Set the source for the left arrow image
+  document.getElementById("left-arrow").src = "./assets/left-arrow-red.png"; // Replace with the actual path
+
+  // Set the source for the right arrow image
+  document.getElementById("right-arrow").src = "./assets/right-arrow-red.png"; // Replace with the actual path
+});
+
+function moveLeft() {
+  if (currentRailIndex > 0) {
+    // Ensure it's within bounds
+    currentRailIndex--; // Move left by one rail index
+    cart.x = railPositions[currentRailIndex] - 40; // Update cart position based on the new index
+  }
+}
+
+function moveRight() {
+  if (currentRailIndex < railPositions.length - 1) {
+    // Ensure it's within bounds
+    currentRailIndex++; // Move right by one rail index
+    cart.x = railPositions[currentRailIndex] - 40; // Update cart position based on the new index
+  }
+}
+
 // Menu button to toggle pause and display overlay
 document.getElementById("menuButton").addEventListener("click", openMenu);
 
 document.addEventListener("keydown", (event) => {
   if (!gamePaused) {
-    if (event.key === "ArrowLeft" && currentRailIndex > 0) {
-      currentRailIndex--;
-      cart.x = railPositions[currentRailIndex] - 40;
-    } else if (
-      event.key === "ArrowRight" &&
-      currentRailIndex < railPositions.length - 1
-    ) {
-      currentRailIndex++;
-      cart.x = railPositions[currentRailIndex] - 40;
+    if (event.key === "ArrowLeft") {
+      moveLeft(); // Call the moveLeft function
+    } else if (event.key === "ArrowRight") {
+      moveRight(); // Call the moveRight function
     }
   }
 });

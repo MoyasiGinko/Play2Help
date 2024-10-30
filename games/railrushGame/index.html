@@ -13,13 +13,16 @@
         overflow: hidden;
         margin: 0;
       }
+
       @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"); /* Importing a game-like font */
+
       .game-header {
         margin-top: 20px;
         font-size: 36px;
         color: #ffa500; /* Bright teal for game feel */
         text-shadow: 2px 2px 4px #000; /* Adding shadow for depth */
       }
+
       #gameContainer {
         position: relative;
         width: 80vw; /* Responsive width */
@@ -30,12 +33,14 @@
         border: 4px solid #ffa500; /* Bright border for emphasis */
         border-radius: 10px; /* Slightly rounded corners */
       }
+
       canvas {
         display: block;
         width: 100%;
         height: 100%;
         background-color: #222; /* Darker background for canvas */
       }
+
       #overlay {
         position: absolute;
         top: 0;
@@ -50,15 +55,18 @@
         color: #fff;
         z-index: 10;
       }
+
       #overlay h2 {
         font-size: 32px;
         margin: 15px 0;
         text-shadow: 1px 1px 3px #000;
       }
+
       #overlay p {
         font-size: 20px;
         margin: 10px 0;
       }
+
       button {
         padding: 12px 20px;
         font-size: 20px;
@@ -70,13 +78,16 @@
         margin: 8px;
         transition: background-color 0.3s ease, transform 0.2s ease;
       }
+
       button:hover {
         background-color: #e06e49; /* Darker coral on hover */
         transform: scale(1.05); /* Slightly enlarge button on hover */
       }
+
       button:active {
         transform: scale(0.95); /* Shrink button on click */
       }
+
       #menuButton {
         position: absolute;
         top: 10px;
@@ -86,9 +97,60 @@
         color: #222; /* Dark text for contrast */
         border: 2px solid #fff; /* White border */
       }
+
       #menuButton:hover {
         background-color: #ff8c00; /* Darker orange on hover */
       }
+
+      /* Left and right buttons */
+      .arrow-icon {
+        width: 50px; /* Make the image fill the button */
+        height: auto; /* Maintain the aspect ratio */
+        display: block; /* Ensure the image behaves like a block element */
+      }
+
+      #leftButton,
+      #rightButton {
+        position: absolute;
+        bottom: 20px;
+        width: 80px; /* Width of buttons */
+        height: auto; /* Height of buttons */
+        background-color: #ff7f50; /* Coral background */
+        color: #fff;
+        border: 2px solid #ffa500; /* Orange border */
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        opacity: 0.3;
+      }
+
+      #leftButton {
+        left: 20px; /* Position to the left */
+      }
+
+      #rightButton {
+        right: 20px; /* Position to the right */
+      }
+
+      #leftButton:hover,
+      #rightButton:hover {
+        background-color: #e06e49; /* Darker coral on hover */
+        transform: scale(1.05); /* Slightly enlarge button on hover */
+      }
+
+      #leftButton:active,
+      #rightButton:active {
+        transform: scale(0.95); /* Shrink button on click */
+      }
+
+      /* Media Queries to show buttons only on mobile devices */
+      @media (min-width: 768px) {
+        #leftButton,
+        #rightButton {
+          display: none; /* Hide on larger screens */
+        }
+      }
+
       /* Media Queries for Responsiveness */
       @media (max-width: 600px) {
         .game-header {
@@ -101,6 +163,7 @@
           font-size: 18px; /* Smaller button text */
         }
       }
+
       @media (max-width: 400px) {
         .game-header {
           font-size: 24px; /* Even smaller font size for very small screens */
@@ -126,6 +189,12 @@
         </button>
       </div>
       <button id="menuButton" onclick="toggleMenu()">Menu</button>
+      <button id="leftButton" onclick="moveLeft()">
+        <img id="left-arrow" class="arrow-icon" />
+      </button>
+      <button id="rightButton" onclick="moveRight()">
+        <img id="right-arrow" class="arrow-icon" />
+      </button>
     </div>
     <script src="game.js"></script>
   </body>
