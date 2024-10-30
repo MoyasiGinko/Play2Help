@@ -98,7 +98,10 @@ function detectCollisions() {
         highestScore = score;
         localStorage.setItem("highestScore", highestScore);
       }
-      displayOverlay(`Game Over\n${score}\nHighest: ${highestScore}`, false);
+      displayOverlay(
+        `Game Over\n Score: ${score}\nHighest: ${highestScore}`,
+        false
+      );
       cancelAnimationFrame(animationFrame);
     }
   });
