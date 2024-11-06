@@ -13,12 +13,12 @@ export default class Player {
   jump() {
     if (this.isOnGround) {
       this.dy = this.jumpStrength;
-      this.isOnGround = false; // Player leaves the ground
+      this.isOnGround = false;
     }
   }
 
-  draw(ctx) {
+  draw(ctx, offsetX) {
     ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.fillRect(this.x - offsetX, this.y, this.width, this.height);
   }
 }

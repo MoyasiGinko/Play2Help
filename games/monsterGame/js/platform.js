@@ -7,8 +7,8 @@ export default class Platform {
     this.color = "brown";
   }
 
-  draw(ctx) {
+  draw(ctx, offsetX) {
     ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.fillRect(this.x - offsetX, this.y, this.width, this.height);
   }
 }
