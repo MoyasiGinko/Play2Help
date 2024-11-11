@@ -1,7 +1,9 @@
+// main.js
+
 import Player from "./player.js";
-import Platform from "./platform.js";
 import { handleInput } from "./input.js";
 import { applyGravity, checkCollision } from "./physics.js";
+import { createMap } from "./terrain.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -9,12 +11,7 @@ canvas.width = 800; // Canvas width
 canvas.height = 400; // Canvas height
 
 let player = new Player(50, 300);
-let platforms = [
-  new Platform(0, 350, 800, 50),
-  new Platform(200, 250, 100, 20),
-  new Platform(400, 250, 100, 20),
-  new Platform(600, 250, 100, 20),
-];
+let platforms = createMap(); // Generate the beautiful map with createMap()
 
 // Camera offset to follow the player
 let offsetX = 0;

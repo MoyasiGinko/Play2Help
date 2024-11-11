@@ -6,7 +6,7 @@ export default class Player {
     this.height = 30;
     this.color = "red";
     this.dy = 0;
-    this.jumpStrength = -12;
+    this.jumpStrength = -16;
     this.isOnGround = false;
   }
 
