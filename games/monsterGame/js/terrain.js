@@ -1,37 +1,37 @@
-// terrain.js
 import Platform from "./platform.js";
 
 export function createMap() {
-  // Main ground terrain, simulating a scrolling platformer
+  // Paths to your images
+  const groundTexture = "./assets/ground.png"; // Path to your ground texture
+  const floatingTexture = "./assets/brick.png"; // Path to your brick texture for floating platforms
+
   const groundTerrain = [
-    new Platform(0, 350, 800, 50), // Start platform
-    new Platform(850, 350, 800, 50), // Extended ground to create continuity
-    new Platform(1750, 350, 800, 50),
-    new Platform(2750, 350, 800, 50),
-    new Platform(3700, 350, 800, 50), // Further along, so the map is very long
+    new Platform(0, 350, 800, 50, groundTexture),
+    new Platform(850, 350, 800, 50, groundTexture),
+    new Platform(1750, 350, 800, 50, groundTexture),
+    new Platform(2750, 350, 800, 50, groundTexture),
+    new Platform(3700, 350, 800, 50, groundTexture),
   ];
 
-  // Floating platforms for challenges (at various heights and distances)
   const floatingPlatforms = [
-    new Platform(200, 220, 120, 20), // Small platform
-    new Platform(400, 300, 120, 20), // Higher platform
-    new Platform(600, 300, 150, 20), // Wider platform
-    new Platform(900, 300, 100, 20), // Smaller and higher
-    new Platform(1300, 300, 200, 20), // Larger floating platform
-    new Platform(1600, 300, 80, 20), // Small, very high up
-    new Platform(1900, 300, 100, 20), // High and small
-    new Platform(2100, 300, 120, 20), // Lower floating platform
-    new Platform(2400, 300, 100, 20), // Medium-high platform
-    new Platform(2700, 300, 150, 20), // Wider, closer to ground
-    new Platform(3100, 300, 100, 20), // High up
-    new Platform(3400, 300, 120, 20), // Near end, at medium height
+    new Platform(200, 250, 120, 20, floatingTexture),
+    new Platform(400, 200, 120, 20, floatingTexture),
+    new Platform(600, 220, 150, 20, floatingTexture),
+    new Platform(900, 180, 220, 20, floatingTexture),
+    new Platform(1300, 120, 200, 20, floatingTexture),
+    new Platform(1600, 100, 80, 20, floatingTexture),
+    new Platform(1900, 150, 100, 20, floatingTexture),
+    new Platform(2100, 250, 120, 20, floatingTexture),
+    new Platform(2400, 300, 100, 20, floatingTexture),
+    new Platform(2700, 200, 150, 20, floatingTexture),
+    new Platform(3100, 100, 100, 20, floatingTexture),
+    new Platform(3400, 150, 120, 20, floatingTexture),
   ];
 
-  // Creating gaps to increase challenge and variety
   const gapPlatforms = [
-    new Platform(1200, 350, 50, 50), // Small gap requiring jump
-    new Platform(1800, 350, 50, 50), // Another small gap
-    new Platform(3300, 350, 50, 50), // Towards the end, another jump
+    new Platform(1200, 350, 50, 50, groundTexture),
+    new Platform(1800, 350, 50, 50, groundTexture),
+    new Platform(3300, 350, 50, 50, groundTexture),
   ];
 
   return [...groundTerrain, ...floatingPlatforms, ...gapPlatforms];
