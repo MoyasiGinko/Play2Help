@@ -53,8 +53,8 @@ export default class Player {
         this.frameHeight, // Source width and height
         this.x - offsetX,
         this.y, // Destination x and y on canvas
-        this.frameWidth,
-        this.frameHeight // Destination width and height
+        this.frameWidth, // Make the player twice the size of the original
+        this.frameHeight // Make the player twice the size of the original
       );
     } else {
       // Fallback: draw a simple rectangle if sprite is not loaded
