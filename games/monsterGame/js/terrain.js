@@ -1,10 +1,12 @@
 import Coin from "./coin.js";
 import Platform from "./platform.js";
+import Monster from "./monster.js";
 
 export function createMap() {
   const groundTexture = "./assets/ground.png";
   const floatingTexture = "./assets/brick.png";
 
+  // Ground platforms where monsters will be placed
   const groundTerrain = [
     new Platform(0, 350, 800, 50, groundTexture),
     new Platform(850, 350, 800, 50, groundTexture),
@@ -13,6 +15,7 @@ export function createMap() {
     new Platform(3700, 350, 800, 50, groundTexture),
   ];
 
+  // Floating platforms for coins
   const floatingPlatforms = [
     new Platform(200, 250, 120, 20, floatingTexture),
     new Platform(400, 200, 120, 20, floatingTexture),
@@ -28,18 +31,27 @@ export function createMap() {
     new Platform(3400, 150, 120, 20, floatingTexture),
   ];
 
+  // Coins placed above the floating platforms
   const coins = floatingPlatforms.map(
     (platform) => new Coin(platform.x + platform.width / 2, platform.y - 20)
   );
 
+  // Monsters placed on the ground platforms
+  const monsters = groundTerrain.map(
+    (platform) => new Monster(platform.x + platform.width / 2, platform.y)
+  );
+
+  // Gap platforms
   const gapPlatforms = [
     new Platform(1200, 350, 50, 50, groundTexture),
     new Platform(1800, 350, 50, 50, groundTexture),
     new Platform(3300, 350, 50, 50, groundTexture),
   ];
 
+  // Return the map object with all elements
   return {
     platforms: [...groundTerrain, ...floatingPlatforms, ...gapPlatforms],
     coins,
+    monsters, // Include monsters in the map
   };
 }
