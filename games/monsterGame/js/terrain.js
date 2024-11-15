@@ -38,7 +38,7 @@ export function createMap() {
 
   // Monsters placed on the ground platforms
   const monsters = groundTerrain.map(
-    (platform) => new Monster(platform.x + platform.width / 2, platform.y)
+    (platform) => new Monster(platform.x + platform.width / 2, platform.y - 2)
   );
 
   // Gap platforms
