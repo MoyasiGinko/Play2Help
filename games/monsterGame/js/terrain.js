@@ -1,9 +1,9 @@
+import Coin from "./coin.js";
 import Platform from "./platform.js";
 
 export function createMap() {
-  // Paths to your images
-  const groundTexture = "./assets/ground.png"; // Path to your ground texture
-  const floatingTexture = "./assets/brick.png"; // Path to your brick texture for floating platforms
+  const groundTexture = "./assets/ground.png";
+  const floatingTexture = "./assets/brick.png";
 
   const groundTerrain = [
     new Platform(0, 350, 800, 50, groundTexture),
@@ -28,11 +28,18 @@ export function createMap() {
     new Platform(3400, 150, 120, 20, floatingTexture),
   ];
 
+  const coins = floatingPlatforms.map(
+    (platform) => new Coin(platform.x + platform.width / 2, platform.y - 20)
+  );
+
   const gapPlatforms = [
     new Platform(1200, 350, 50, 50, groundTexture),
     new Platform(1800, 350, 50, 50, groundTexture),
     new Platform(3300, 350, 50, 50, groundTexture),
   ];
 
-  return [...groundTerrain, ...floatingPlatforms, ...gapPlatforms];
+  return {
+    platforms: [...groundTerrain, ...floatingPlatforms, ...gapPlatforms],
+    coins,
+  };
 }

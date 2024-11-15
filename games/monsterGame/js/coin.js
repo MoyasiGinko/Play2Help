@@ -1,5 +1,3 @@
-// coin.js
-
 export default class Coin {
   constructor(x, y) {
     this.x = x;
@@ -23,8 +21,9 @@ export default class Coin {
       Math.pow(this.x - player.x, 2) + Math.pow(this.y - player.y, 2)
     );
     if (dist < this.radius + player.width / 2 && !this.collected) {
-      this.collected = true;
-      score += 10; // Increase score
+      this.collected = true; // Mark coin as collected
+      return 10; // Return the score for this coin
     }
+    return 0; // No score if not collected
   }
 }

@@ -9,7 +9,9 @@ canvas.width = 800;
 canvas.height = 400;
 
 let player = new Player(50, 300);
-let platforms = createMap();
+let { platforms, coins } = createMap();
+
+let score = 0;
 
 // Background image
 const background = new Image();
@@ -47,9 +49,20 @@ function gameLoop() {
   // Apply collision detection with platforms
   platforms.forEach((platform) => checkCollision(player, platform));
 
+  // Check for coin collection and update score
+  coins.forEach((coin) => {
+    score += coin.collect(player); // Add the coin's score if collected
+  });
+
   // Draw all objects relative to the camera offset
   platforms.forEach((platform) => platform.draw(ctx, offsetX));
+  coins.forEach((coin) => coin.draw(ctx, offsetX));
   player.draw(ctx, offsetX);
+
+  // Display score
+  ctx.fillStyle = "black";
+  ctx.font = "20px Arial";
+  ctx.fillText(`Score: ${score}`, 20, 30);
 
   requestAnimationFrame(gameLoop);
 }
