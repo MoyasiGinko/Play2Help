@@ -1,6 +1,6 @@
 const keys = { ArrowLeft: false, ArrowRight: false, Space: false };
 
-// Register event listeners
+// Register event listeners for keyboard
 document.addEventListener("keydown", (event) => {
   if (event.code === "ArrowLeft") keys.ArrowLeft = true;
   if (event.code === "ArrowRight") keys.ArrowRight = true;
@@ -13,22 +13,44 @@ document.addEventListener("keyup", (event) => {
   if (event.code === "Space") keys.Space = false;
 });
 
-// Handle input
+// Handle mobile input buttons
+const leftButton = document.getElementById("leftButton");
+const rightButton = document.getElementById("rightButton");
+const jumpButton = document.getElementById("jumpButton");
+
+leftButton.addEventListener("touchstart", () => {
+  keys.ArrowLeft = true;
+});
+leftButton.addEventListener("touchend", () => {
+  keys.ArrowLeft = false;
+});
+
+rightButton.addEventListener("touchstart", () => {
+  keys.ArrowRight = true;
+});
+rightButton.addEventListener("touchend", () => {
+  keys.ArrowRight = false;
+});
+
+jumpButton.addEventListener("touchstart", () => {
+  keys.Space = true;
+});
+jumpButton.addEventListener("touchend", () => {
+  keys.Space = false;
+});
+
+// Handle player input (keyboard and mobile controls)
 export function handleInput(player) {
-  // Move player left or right
   if (keys.ArrowLeft) {
-    player.x -= 5; // Move left
+    player.x -= 5;
   }
   if (keys.ArrowRight) {
-    player.x += 5; // Move right
+    player.x += 5;
   }
-
-  // Jump only if the player is on the ground
   if (keys.Space && player.isOnGround) {
     player.jump();
   }
 
-  // Prevent player from moving out of the canvas from left side only
   if (player.x < 0) {
     player.x = 0;
   }

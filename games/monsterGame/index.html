@@ -12,16 +12,12 @@
     </div>
     <div id="gameContainer">
       <canvas id="gameCanvas"></canvas>
-      <!-- Overlay for Game Over and Retry -->
       <div id="gameOverlay" class="overlay">
         <div class="overlay-content">
-          <!-- Add a container in the HTML to show the dynamic game messages -->
           <div id="gameMessageContainer" class="game-message-container"></div>
-
           <div id="highestScoreText" class="high-score-text">
             Highest Score: <span id="highestScore">0</span>
           </div>
-
           <button
             id="nextLevelButton"
             class="next-level-button"
@@ -30,9 +26,19 @@
             Next Level
           </button>
           <button id="startOverButton" style="display: none">Start Over</button>
-
           <button id="retryButton" class="retry-button">Retry</button>
         </div>
+      </div>
+    </div>
+
+    <!-- Mobile control buttons -->
+    <div id="mobileControls" class="mobile-controls">
+      <div class="leftContainer">
+        <button id="leftButton" class="control-button">Left</button>
+        <button id="rightButton" class="control-button">Right</button>
+      </div>
+      <div class="rightContainer">
+        <button id="jumpButton" class="control-button">Jump</button>
       </div>
     </div>
 
