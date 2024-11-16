@@ -28,6 +28,7 @@ const backgrounds = {
 };
 let background = new Image();
 background.src = backgrounds.level1; // Initial background for level 1
+const backgroundMusic = new Audio("./assets/background-music.mp3");
 
 // Camera offset to follow the player
 let offsetX = 0;
@@ -221,6 +222,7 @@ function gameLoop() {
   ctx.font = `${20 * scaleFactor}px Arial`;
   ctx.fillText(`Score: ${score}`, 20, 30);
 
+  backgroundMusic.play();
   requestAnimationFrame(gameLoop);
 }
 

@@ -10,6 +10,8 @@ export default class Monster {
     this.image = new Image();
     this.image.src = texturePath;
 
+    this.sound = new Audio("./assets/bomb-explosion.mp3");
+
     this.imageLoaded = false;
     this.image.onload = () => {
       this.imageLoaded = true; // Mark image as loaded
@@ -46,9 +48,10 @@ export default class Monster {
       player.x < this.x + this.width &&
       player.x + player.width > this.x &&
       player.y < this.y &&
-      player.y + player.height > this.y
+      player.y + player.height > this.y - this.height
     ) {
       this.active = false; // Monster is deactivated upon collision
+      this.sound.play();
       return true; // Collision detected
     }
     return false; // No collision

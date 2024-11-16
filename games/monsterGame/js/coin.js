@@ -5,6 +5,8 @@ export default class Coin {
     this.radius = 10;
     this.collected = false;
     this.color = "yellow"; // Coin color
+    this.sound = new Audio("./assets/coin-collected.mp3"); // Add your sound file here
+    this.sound.volume = 0.3; // Optional: Set volume if needed
   }
 
   draw(ctx, offsetX) {
@@ -22,6 +24,7 @@ export default class Coin {
     );
     if (dist < this.radius + player.width / 2 && !this.collected) {
       this.collected = true; // Mark coin as collected
+      this.sound.play(); // Play the sound when the coin is collected
       return 10; // Return the score for this coin
     }
     return 0; // No score if not collected
