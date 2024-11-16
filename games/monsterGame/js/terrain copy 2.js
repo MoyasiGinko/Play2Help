@@ -5,7 +5,6 @@ import Monster from "./monster.js";
 export function createMap() {
   const groundTexture = "./assets/ground.png";
   const floatingTexture = "./assets/brick.png";
-  const monsterTexture = "./assets/monster.png";
 
   // Ground platforms where monsters will be placed
   const groundTerrain = [
@@ -14,6 +13,7 @@ export function createMap() {
     new Platform(1750, 350, 800, 50, groundTexture),
     new Platform(2750, 350, 800, 50, groundTexture),
     new Platform(3700, 350, 800, 50, groundTexture),
+    new Platform(4700, 350, 800, 50, groundTexture),
   ];
 
   // Floating platforms for coins
@@ -39,12 +39,7 @@ export function createMap() {
 
   // Monsters placed on the ground platforms
   const monsters = groundTerrain.map(
-    (platform) =>
-      new Monster(
-        platform.x + platform.width / 2,
-        platform.y - 2,
-        monsterTexture
-      )
+    (platform) => new Monster(platform.x + platform.width / 2, platform.y - 2)
   );
 
   // Gap platforms

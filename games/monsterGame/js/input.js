@@ -15,11 +15,21 @@ document.addEventListener("keyup", (event) => {
 
 // Handle input
 export function handleInput(player) {
-  if (keys.ArrowLeft) player.x -= 5;
-  if (keys.ArrowRight) player.x += 5;
+  // Move player left or right
+  if (keys.ArrowLeft) {
+    player.x -= 5; // Move left
+  }
+  if (keys.ArrowRight) {
+    player.x += 5; // Move right
+  }
 
   // Jump only if the player is on the ground
-  if (keys.Space && player.isOnGround == true) {
+  if (keys.Space && player.isOnGround) {
     player.jump();
+  }
+
+  // Prevent player from moving out of the canvas from left side only
+  if (player.x < 0) {
+    player.x = 0;
   }
 }

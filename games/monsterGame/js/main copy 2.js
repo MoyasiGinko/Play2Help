@@ -5,8 +5,6 @@ import { createMap } from "./terrain.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
-
-// Set initial canvas size based on window size
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -24,8 +22,7 @@ background.src = "./assets/origbig.png"; // Your sky background image
 // Camera offset to follow the player
 let offsetX = 0;
 
-// Calculate scale factor based on canvas width and height
-const scaleFactor = canvas.width / 800; // Base width of 800px for scaling
+// Get the game overlay and retry button
 const gameOverlay = document.getElementById("gameOverlay");
 const retryButton = document.getElementById("retryButton");
 
@@ -52,8 +49,10 @@ function resetGame() {
   coins = mapData.coins;
   monsters = mapData.monsters;
   offsetX = 0; // Reset camera offset
-  gameOverlay.style.display = "none"; // Hide overlay
   gameLoop(); // Restart the game loop
+
+  // Hide the overlay when restarting the game
+  gameOverlay.style.display = "none";
 }
 
 // Main game loop
@@ -62,7 +61,18 @@ function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Display "Game Over" message
-    document.getElementById("highestScore").textContent = highestScore;
+    ctx.fillStyle = "black";
+    ctx.font = "40px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("Game Over!", canvas.width / 2, canvas.height / 2 - 20);
+
+    // Display highest score
+    ctx.font = "20px Arial";
+    ctx.fillText(
+      `Highest Score: ${highestScore}`,
+      canvas.width / 2,
+      canvas.height / 2 + 20
+    );
 
     // Show the overlay and the retry button
     gameOverlay.style.display = "flex";
@@ -79,7 +89,8 @@ function gameLoop() {
   handleInput(player);
   applyGravity(player);
 
-  // Update camera offset to keep the player centered
+  // Update camera offset to keep the player centered horizontally
+  // Ensure the camera does not go out of bounds
   const halfCanvasWidth = canvas.width / 2;
   const worldWidth =
     platforms[platforms.length - 1].x + platforms[platforms.length - 1].width;
@@ -89,6 +100,9 @@ function gameLoop() {
   // Prevent the camera from going out of bounds
   if (offsetX < 0) {
     offsetX = 0; // Don't let it go past the left edge
+  }
+  if (offsetX > worldWidth - canvas.width) {
+    offsetX = worldWidth - canvas.width; // Don't let it go past the right edge
   }
 
   // Apply collision detection with platforms
@@ -109,30 +123,21 @@ function gameLoop() {
     }
   });
 
-  // Draw all objects relative to the camera offset and apply scaling
-  platforms.forEach((platform) => platform.draw(ctx, offsetX, scaleFactor));
-  coins.forEach((coin) => coin.draw(ctx, offsetX, scaleFactor));
-  monsters.forEach((monster) => monster.draw(ctx, offsetX, scaleFactor));
-  player.draw(ctx, offsetX, scaleFactor);
+  // Draw all objects relative to the camera offset
+  platforms.forEach((platform) => platform.draw(ctx, offsetX));
+  coins.forEach((coin) => coin.draw(ctx, offsetX));
+  monsters.forEach((monster) => monster.draw(ctx, offsetX));
+  player.draw(ctx, offsetX);
 
   // Display score
   ctx.fillStyle = "black";
-  ctx.font = `${20 * scaleFactor}px Arial`;
+  ctx.font = "20px Arial";
   ctx.fillText(`Score: ${score}`, 20, 30);
 
   requestAnimationFrame(gameLoop);
 }
 
-// Resize canvas and adjust game elements on window resize
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  // Recalculate scale factor based on new width
-  scaleFactor = canvas.width / 800;
-  resetGame(); // Reset the game when resizing
-});
-
+// Add event listener for the retry button
 retryButton.addEventListener("click", resetGame);
 
 gameLoop();

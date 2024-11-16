@@ -1,22 +1,42 @@
 export default class Monster {
-  constructor(x, y) {
+  constructor(x, y, texturePath) {
     this.x = x;
     this.y = y;
     this.width = 30; // Monster width
     this.height = 50; // Monster height
-    this.color = "red"; // Monster color
     this.active = true; // Monster is active until player collides
+
+    // Load the texture
+    this.image = new Image();
+    this.image.src = texturePath;
+
+    this.imageLoaded = false;
+    this.image.onload = () => {
+      this.imageLoaded = true; // Mark image as loaded
+    };
   }
 
   draw(ctx, offsetX) {
     if (this.active) {
-      ctx.fillStyle = this.color;
-      ctx.fillRect(
-        this.x - offsetX,
-        this.y - this.height,
-        this.width,
-        this.height
-      );
+      if (this.imageLoaded) {
+        // Draw the image if loaded
+        ctx.drawImage(
+          this.image,
+          this.x - offsetX,
+          this.y - this.height,
+          this.width,
+          this.height
+        );
+      } else {
+        // Fallback to a colored rectangle while the image loads
+        ctx.fillStyle = "red";
+        ctx.fillRect(
+          this.x - offsetX,
+          this.y - this.height,
+          this.width,
+          this.height
+        );
+      }
     }
   }
 

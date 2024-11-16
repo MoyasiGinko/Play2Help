@@ -7,7 +7,23 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <canvas id="gameCanvas"></canvas>
+    <div id="landscapeNotice">
+      Please rotate your device to landscape mode to play the game.
+    </div>
+    <div id="gameContainer">
+      <canvas id="gameCanvas"></canvas>
+      <!-- Overlay for Game Over and Retry -->
+      <div id="gameOverlay" class="overlay">
+        <div class="overlay-content">
+          <div id="gameOverText" class="game-over-title">Game Over!</div>
+          <div id="highestScoreText" class="high-score-text">
+            Highest Score: <span id="highestScore">0</span>
+          </div>
+          <button id="retryButton" class="retry-button">Retry</button>
+        </div>
+      </div>
+    </div>
+
     <script src="js/main.js" type="module"></script>
   </body>
 </html>
