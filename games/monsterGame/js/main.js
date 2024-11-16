@@ -4,6 +4,7 @@ import { applyGravity, checkCollision } from "./physics.js";
 import { createMap } from "./terrain.js";
 
 const canvas = document.getElementById("gameCanvas");
+
 const ctx = canvas.getContext("2d");
 
 // Set initial canvas size based on window size
@@ -77,7 +78,8 @@ function gameLoop() {
 
   // Apply player input and gravity
   handleInput(player);
-  applyGravity(player);
+  // In your game loop
+  applyGravity(player, canvas);
 
   // Update camera offset to keep the player centered
   const halfCanvasWidth = canvas.width / 2;

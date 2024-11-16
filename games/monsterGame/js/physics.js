@@ -1,8 +1,9 @@
-export function checkIfOnGround(player) {
-  // Check if the player is touching the ground or a platform
-  if (player.y + player.height >= 400) {
-    // Assuming 400 is the ground level
-    player.y = 400 - player.height; // Set player to the ground level
+export function checkIfOnGround(player, canvas) {
+  // Use canvas height to determine the ground level
+  const groundLevel = canvas.height;
+
+  if (player.y + player.height >= groundLevel) {
+    player.y = groundLevel - player.height; // Set player to the ground level
     player.dy = 0; // Stop downward movement
     player.isOnGround = true; // Mark as on ground
   } else {
@@ -10,7 +11,7 @@ export function checkIfOnGround(player) {
   }
 }
 
-export function applyGravity(player) {
+export function applyGravity(player, canvas) {
   const gravity = 0.5;
 
   if (!player.isOnGround) {
@@ -18,7 +19,7 @@ export function applyGravity(player) {
     player.y += player.dy; // Update the player's vertical position
   }
 
-  checkIfOnGround(player); // Check if the player has hit the ground after applying gravity
+  checkIfOnGround(player, canvas); // Check if the player has hit the ground after applying gravity
 }
 
 export function checkCollision(player, platform) {
