@@ -20,8 +20,8 @@ let level = 1; // Start at level 1
 
 // Background images for different levels
 const backgrounds = {
-  level1: "./assets/level1.png", // Level 1 background
-  level2: "./assets/level2.png", // Level 2 background
+  level1: "./assets/origbig.png", // Level 1 background
+  level2: "./assets/night_city.png", // Level 2 background
   level3: "./assets/level3.png", // Level 3 background
   level4: "./assets/level4.png", // Level 4 background
   level5: "./assets/level5.png", // Level 5 background
@@ -38,7 +38,6 @@ const gameOverlay = document.getElementById("gameOverlay");
 const retryButton = document.getElementById("retryButton");
 const nextLevelButton = document.getElementById("nextLevelButton");
 const gameMessageContainer = document.getElementById("gameMessageContainer");
-const startOverButton = document.getElementById("startOverButton"); // Start Over button
 
 // Draw the background with a parallax effect
 function drawBackground() {
@@ -78,7 +77,6 @@ function nextLevel() {
   monsters = mapData.monsters;
   offsetX = 0; // Reset camera offset
   gameOverlay.style.display = "none"; // Hide overlay
-  gameMessageContainer.textContent += ` Level ${level}`; // Append the current level text
   gameLoop();
 }
 
@@ -109,21 +107,18 @@ function setBackgroundForLevel(level) {
 function checkLevelGoal() {
   if (player.x >= 500) {
     // Adjust based on your level goal
-    gameMessageContainer.textContent = "Game Over!";
     highestScore = Math.max(score, highestScore); // Update the highest score
     gameOver = true; // End the game when reaching the goal
 
     // Transition to the next level or restart after last level
-    if (level <= 5) {
-      gameMessageContainer.textContent = `Level ${level} completed!`; // Update the message
+    if (level < 5) {
       level++; // Move to next level
       setBackgroundForLevel(level); // Set the background for the new level
     } else {
-      // If all levels are completed, show the "Start Over" button
+      // Restart from level 1 if all levels are finished
       level = 1;
       gameMessageContainer.textContent =
         "You completed all levels! Starting fresh...";
-      startOverButton.style.display = "block"; // Show the Start Over button
     }
 
     // Show the overlay and the retry button
@@ -133,6 +128,10 @@ function checkLevelGoal() {
     // Show the next level button for the player to continue
     if (level <= 5) {
       nextLevelButton.style.display = "flex";
+    } else {
+      // Game is finished, show completion message
+      gameMessageContainer.textContent =
+        "You completed all levels! Starting from level 1.";
     }
   }
 }
@@ -141,12 +140,6 @@ function checkLevelGoal() {
 nextLevelButton.addEventListener("click", () => {
   nextLevelButton.style.display = "none"; // Hide next level button
   nextLevel(); // Reset the game for the next level
-});
-
-// Handle the start over action
-startOverButton.addEventListener("click", () => {
-  startOverButton.style.display = "none"; // Hide start over button
-  resetGame(); // Restart the game
 });
 
 // Main game loop
@@ -191,19 +184,13 @@ function gameLoop() {
     score += coinCollected;
   });
 
-  // Monster collision logic for game over
+  // Check for monster collision
   monsters.forEach((monster) => {
     if (monster.checkCollision(player)) {
       console.log("Monster Collision! Game Over");
 
       highestScore = Math.max(score, highestScore); // Update the highest score
       gameOver = true; // End the game if a monster is touched
-      gameMessageContainer.textContent = `Game Over!`;
-      gameOverlay.style.display = "flex"; // Show the game over overlay
-      document.getElementById("highestScore").textContent = highestScore;
-
-      // Show the retry button
-      retryButton.style.display = "flex";
     }
   });
 
