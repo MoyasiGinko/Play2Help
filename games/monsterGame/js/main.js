@@ -107,7 +107,7 @@ function setBackgroundForLevel(level) {
 
 // Check if player has reached the level goal
 function checkLevelGoal() {
-  if (player.x >= 500) {
+  if (player.x >= 30500) {
     // Adjust based on your level goal
     gameMessageContainer.textContent = "Game Over!";
     highestScore = Math.max(score, highestScore); // Update the highest score
