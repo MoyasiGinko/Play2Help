@@ -15,10 +15,22 @@
       <!-- Overlay for Game Over and Retry -->
       <div id="gameOverlay" class="overlay">
         <div class="overlay-content">
-          <div id="gameOverText" class="game-over-title">Game Over!</div>
+          <!-- <div id="gameOverText" class="game-over-title">Game Over!</div> -->
+          <!-- Add a container in the HTML to show the dynamic game messages -->
+          <div id="gameMessageContainer" class="game-message-container"></div>
+
           <div id="highestScoreText" class="high-score-text">
             Highest Score: <span id="highestScore">0</span>
           </div>
+          <!-- Add inside your gameOverlay div (in HTML) -->
+          <button
+            id="nextLevelButton"
+            class="next-level-button"
+            style="display: none"
+          >
+            Next Level
+          </button>
+
           <button id="retryButton" class="retry-button">Retry</button>
         </div>
       </div>

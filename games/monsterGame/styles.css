@@ -62,7 +62,7 @@ body {
 }
 
 /* Game Over text */
-.game-over-title {
+.game-message-container {
   font-size: 36px;
   font-weight: bold;
   margin-bottom: 15px;
@@ -91,5 +91,21 @@ body {
 
 .retry-button:hover {
   background-color: #45a049; /* Slightly darker green on hover */
+  transform: scale(1.1); /* Subtle zoom effect */
+}
+
+.next-level-button {
+  font-size: 18px;
+  padding: 10px 20px;
+  background-color: #ff9800; /* Orange button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.next-level-button:hover {
+  background-color: #e68900; /* Darker orange on hover */
   transform: scale(1.1); /* Subtle zoom effect */
 }

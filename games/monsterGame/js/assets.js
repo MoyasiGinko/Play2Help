@@ -6,16 +6,16 @@ export const assets = {
   tree: new Image(),
   bush: new Image(),
   plant: new Image(),
+  terrain: new Image(),
+  fullBackground: new Image(),
 };
 
 // Set the source of each image (use appropriate paths for your images)
-assets.groundPlatform.src = "../assets/ground.png"; // Ground platform texture
-assets.floatingPlatform.src = "../assets/brick.png"; // Brick platform texture
-
+assets.groundPlatform.src = "./assets/ground.png"; // Ground platform texture
+assets.floatingPlatform.src = "./assets/brick.png"; // Brick platform texture
 assets.backgroundSky.src = "../assets/sky.png"; // Sky background
-assets.tree.src = "../assets/tree.png"; // Tree
-assets.bush.src = "../assets/bush.png"; // Bush
-assets.plant.src = "../assets/plant.png"; // Plant
-assets.terrain = "../assets/terrain.png"; // Terrain texture
-
-assets.fullBackground = "../assets/full-background.png"; // Full background image
+assets.tree.src = "./assets/tree.png"; // Tree
+assets.bush.src = "./assets/bush.png"; // Bush
+assets.plant.src = "./assets/plant.png"; // Plant
+assets.terrain.src = "./assets/terrain.png"; // Terrain texture
+assets.fullBackground.src = "./assets/full-background.png"; // Full background image
